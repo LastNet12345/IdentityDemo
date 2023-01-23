@@ -1,4 +1,5 @@
 using IdentityDemo.Data;
+using IdentityDemo.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,7 @@ namespace IdentityDemo
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            builder.Services.AddDefaultIdentity<Member>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.AddControllersWithViews();
