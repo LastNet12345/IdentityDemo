@@ -18,9 +18,23 @@ namespace IdentityDemo
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<Member>(options => options.SignIn.RequireConfirmedAccount = false)
+            //1. Add Member
+            builder.Services.AddDefaultIdentity<Member>(options => 
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 3;
+            
+            })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+            builder.Services.ConfigureApplicationCookie(opt =>
+            {
+                opt.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                
+            });
 
             builder.Services.AddControllersWithViews();
 
